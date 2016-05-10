@@ -1,0 +1,49 @@
+plugins {
+    id "com.github.hierynomus.license" version "0.12.1"
+}
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group 'cas.cs4tb3'
+version '1.0.0'
+
+license {
+    include '**/*.groovy'
+    header = rootProject.file('LICENSE')
+    strictCheck true
+}
+build.dependsOn licenseFormat
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+//Define a shade configuration. Dependencies in this configuration
+//are available at compile time and are shaded into the jar.
+configurations {
+    shade
+    shade.transitive = false
+    compile.extendsFrom(shade)
+}
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+    shade group: 'cas.cs4tb3', name: 'MellowD', version: '+'
+
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    //Include all shaded dependencies in the jar
+    from configurations.shade
+            .collect { it.isDirectory() ? it : zipTree(it) }
+
+}
+
+uploadArchives {
+    repositories.mavenLocal()
+}
