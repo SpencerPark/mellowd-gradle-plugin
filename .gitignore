@@ -1,0 +1,7 @@
+# Gradle stuff
+.gradle
+build/
+!gradle-wrapper.jar
+
+# Intellij stuff
+.idea/
