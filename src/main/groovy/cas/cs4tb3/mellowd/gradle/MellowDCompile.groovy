@@ -129,6 +129,16 @@ class MellowDCompile extends SourceTask {
 
         //Clean up removed sources
         destinationDir.eachFileRecurse(FileType.FILES) { compiledSrc ->
+            //Check that the compiled source has a filetype that matches the configuration
+            MellowDCompilationExtension specConfig = configurations.findByName(srcName.toLowerCase())
+            if (specConfig == null)
+                specConfig = defaultConfig
+            //If it dosn't match the configuration we can delete it
+            if (!compiledSrc.name.toLowerCase().endsWith(specConfig.outputType.extension)) {
+                compiledSrc.delete()
+                return
+            }
+
             def srcName = compiledSrc.name.replaceAll(~/\.[^.]*$/, '')
             //If any of the source files match the name of the compiled source than the
             //compilation result can remain, otherwise we will clean it up

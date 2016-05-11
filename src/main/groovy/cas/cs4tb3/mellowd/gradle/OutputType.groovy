@@ -24,8 +24,14 @@
 package cas.cs4tb3.mellowd.gradle
 
 enum OutputType {
-    MIDI,
-    WAV
+    MIDI('.mid'),
+    WAV('.wav');
+
+    String extension
+
+    OutputType(String extension) {
+        this.extension = extension
+    }
 }
 
 
