@@ -1,7 +1,17 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.4"
+    }
+}
 plugins {
     id "com.github.hierynomus.license" version "0.12.1"
 }
-
+apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
@@ -14,6 +24,20 @@ license {
     strictCheck true
 }
 build.dependsOn licenseFormat
+
+pluginBundle {
+    website = 'http://spencerpark.github.io/MellowD/build/docs/docco/'
+    vcsUrl = 'https://github.com/SpencerPark/mellowd-gradle-plugin'
+    description = 'Integrate MellowD compilation into the build cycle'
+    tags = ['mellowd', 'music']
+
+    plugins {
+        mellowdPlugin {
+            id = 'io.github.spencerpark.mellowd'
+            displayName = 'MellowD language support'
+        }
+    }
+}
 
 repositories {
     mavenLocal()
