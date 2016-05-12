@@ -18,7 +18,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.cas.cs4tb3:mellowd-gradle-plugin:1.0.1"
+    classpath "gradle.plugin.cas.cs4tb3:mellowd-gradle-plugin:1.0.2"
   }
 }
 
@@ -28,7 +28,7 @@ The newer versions (>= 2.1) of gradle can use the following simpler
 notation to apply the plugin:
 ```gradle
 plugins {
-  id "io.github.spencerpark.mellowd" version "1.0.1"
+  id "io.github.spencerpark.mellowd" version "1.0.2"
 }
 ```
 

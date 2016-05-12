@@ -130,7 +130,7 @@ class MellowDCompile extends SourceTask {
         //Clean up removed sources
         destinationDir.eachFileRecurse(FileType.FILES) { compiledSrc ->
             //Check that the compiled source has a filetype that matches the configuration
-            MellowDCompilationExtension specConfig = configurations.findByName(srcName.toLowerCase())
+            MellowDCompilationExtension specConfig = configurations.findByName(compiledSrc.name.toLowerCase().replace('.mid', '').replace('.wav', ''))
             if (specConfig == null)
                 specConfig = defaultConfig
             //If it dosn't match the configuration we can delete it
@@ -150,8 +150,9 @@ class MellowDCompile extends SourceTask {
             }
 
             //No source file for the compilation result anymore so we will delete it
-            if (!srcExists)
+            if (!srcExists) {
                 compiledSrc.delete()
+            }
         }
 
         //Clean up any meta data entries for non-existent sources
