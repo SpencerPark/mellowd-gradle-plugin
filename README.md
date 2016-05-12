@@ -19,7 +19,6 @@ buildscript {
   }
   dependencies {
     classpath "gradle.plugin.cas.cs4tb3:mellowd-gradle-plugin:1.0.2"
-  }
 }
 
 apply plugin: "io.github.spencerpark.mellowd"

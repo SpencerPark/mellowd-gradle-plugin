@@ -150,9 +150,8 @@ class MellowDCompile extends SourceTask {
             }
 
             //No source file for the compilation result anymore so we will delete it
-            if (!srcExists) {
+            if (!srcExists)
                 compiledSrc.delete()
-            }
         }
 
         //Clean up any meta data entries for non-existent sources
